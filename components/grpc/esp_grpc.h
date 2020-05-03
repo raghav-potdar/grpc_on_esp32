@@ -1,5 +1,7 @@
 #pragma once
 #include "include/sh2lib/sh2lib.h"
+#include "esp_tls.h"
+#include <nghttp2/nghttp2.h>
 
 // #include ".pb.h"
 
@@ -38,11 +40,11 @@ typedef enum responses_header{
 	GRPC_PERCENT_BYTE_ENCODED
 } responses_header_t;
 
-struct nghttp2_nv *nva;
+nghttp2_nv *nva;
 
 //Default: 9 Request Header
 //To change use this function 
-void no_req_head(int req);
+void no_req_head(int newreq);
 
 //Use this function to declare headers for http2 communication
 void add_headers(requests_header_t req, char *head);

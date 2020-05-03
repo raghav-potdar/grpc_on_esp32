@@ -1,15 +1,14 @@
 #include <string.h>
 #include <stdlib.h>
-// #include <sys/time.h>
-// #include "freertos/FreeRTOS.h"
-// #include "freertos/task.h"
-// #include "freertos/event_groups.h"
-// #include "esp_wifi.h"
-// #include "esp_event.h"
-// #include "lwip/apps/sntp.h"
-// #include "esp_log.h"
-// #include "esp_system.h"
-// #include "nvs_flash.h"
+#include <sys/time.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "esp_wifi.h"
+#include "esp_event.h"
+#include "lwip/apps/sntp.h"
+#include "esp_system.h"
+#include "nvs_flash.h"
+#include "tcpip_adapter.h"
 
 #include "../components/grpc/esp_grpc.h"
 
@@ -27,30 +26,15 @@
 
 void app_main()
 {
-    // nvs_flash_init();
-    // tcpip_adapter_init();
-    // ESP_ERROR_CHECK( esp_event_loop_init(event_handler, NULL) );
-    // wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-    // ESP_ERROR_CHECK( esp_wifi_init(&cfg) );
-    // ESP_ERROR_CHECK( esp_wifi_set_storage(WIFI_STORAGE_RAM) );
-    // ESP_ERROR_CHECK( esp_wifi_set_mode(WIFI_MODE_STA) );
-    // wifi_config_t sta_config = {
-    //     .sta = {
-    //         .ssid = CONFIG_ESP_WIFI_SSID,
-    //         .password = CONFIG_ESP_WIFI_PASSWORD,
-    //         .bssid_set = false
-    //     }
-    // };
-    // ESP_ERROR_CHECK( esp_wifi_set_config(WIFI_IF_STA, &sta_config) );
-    // ESP_ERROR_CHECK( esp_wifi_start() );
-    // ESP_ERROR_CHECK( esp_wifi_connect() );
+    ESP_ERROR_CHECK( nvs_flash_init() );
+    tcpip_adapter_init();
+    ESP_ERROR_CHECK(esp_event_loop_create_default());
 
-    // ESP_ERROR_CHECK( nvs_flash_init() );
+    //ESP_ERROR_CHECK(grpc_connect());
 
     // requests_header_t req = GRPC_METHOD;
-    char *head1_val = "post";
 
     no_req_head(20);
 
-    add_headers(GRPC_METHOD , head1_val);
+    add_headers(GRPC_METHOD,"post");
 }
