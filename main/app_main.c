@@ -26,9 +26,9 @@
 
 void app_main()
 {
-    ESP_ERROR_CHECK( nvs_flash_init() );
-    tcpip_adapter_init();
-    ESP_ERROR_CHECK(esp_event_loop_create_default());
+    // ESP_ERROR_CHECK( nvs_flash_init() );
+    // tcpip_adapter_init();
+    // ESP_ERROR_CHECK(esp_event_loop_create_default());
 
     //ESP_ERROR_CHECK(grpc_connect());
 
@@ -37,4 +37,8 @@ void app_main()
     no_req_head(20);
 
     add_headers(GRPC_METHOD,"post");
+    
+    printf("Restarting now.\n");
+    fflush(stdout);
+    esp_restart();
 }
